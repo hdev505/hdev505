@@ -3,12 +3,12 @@
   <img alig src="https://github-profile-trophy.vercel.app/?username=Honest0&no-bg=true&no-frame=true&theme=onedark&column=8" />
 </div>
 
-<div align='center' width='100%'>
-  <img width='50%' height="250px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Honest0&layout=compact&hide_border=true&title_color=00b3ff&text_color=00b4ff&bg_color=0d1117" />
-  <a width='50%' href="https://github.com/Honest0?tab=achievements">
-    <img src="https://github-profile-trophy.vercel.app/?username=Honest0&theme=radical&no-frame=false&no-bg=true&margin-w=4&row=2&column=3"  height="250px" alt="@Honest0's trophy stats"/>
-  </a>
-</div>
+<p align="center">
+<a href="https://github.com/Honest0">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=Honest0&show_icons=true&theme=midnight-purple&include_all_commits=true&count_private=true"/>
+  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=Honest0&layout=compact&langs_count=8&theme=midnight-purple"/>
+</a>
+</p>
 
 ## 💬 Talk with me
 
