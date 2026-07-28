@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ribbon · hdev505</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .canvas-wrap {
+      display: grid;
+      place-items: center;
+    }
+
+    canvas {
+      width: min(100%, 420px);
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #10141c;
+      touch-action: none;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 56px 56px 56px;
+      grid-template-rows: 48px 48px;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .controls .btn {
+      padding: 0;
+      border-radius: 12px;
+      width: 56px;
+      height: 48px;
+    }
+
+    .controls .up { grid-column: 2; grid-row: 1; }
+    .controls .left { grid-column: 1; grid-row: 2; }
+    .controls .down { grid-column: 2; grid-row: 2; }
+    .controls .right { grid-column: 3; grid-row: 2; }
+
+    @media (min-width: 720px) {
+      .controls { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="brand">Ribbon</div>
+      <a class="back" href="index.html">All games</a>
+    </div>
+
+    <h1>Ribbon</h1>
+    <p class="lede">Arrow keys or WASD. Eat gold. Don’t hit the walls — or yourself.</p>
+
+    <section class="panel">
+      <div class="hud">
+        <div class="stat">
+          <span>Score</span>
+          <strong id="score">0</strong>
+        </div>
+        <div class="stat">
+          <span>Best</span>
+          <strong id="best">0</strong>
+        </div>
+        <button class="btn primary" id="restart" type="button">Play</button>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="board" width="420" height="420" aria-label="Snake game board"></canvas>
+      </div>
+
+      <div class="controls" aria-label="Direction controls">
+        <button class="btn up" type="button" data-dir="up">↑</button>
+        <button class="btn left" type="button" data-dir="left">←</button>
+        <button class="btn down" type="button" data-dir="down">↓</button>
+        <button class="btn right" type="button" data-dir="right">→</button>
+      </div>
+
+      <p class="hint" id="status">Press Play to begin.</p>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("board");
+    const ctx = canvas.getContext("2d");
+    const scoreEl = document.getElementById("score");
+    const bestEl = document.getElementById("best");
+    const statusEl = document.getElementById("status");
+    const restartBtn = document.getElementById("restart");
+
+    const CELL = 21;
+    const COLS = 20;
+    const ROWS = 20;
+    const SPEED = 110;
+
+    let snake, dir, nextDir, food, score, running, timer, best;
+
+    best = Number(localStorage.getItem("hdev505-ribbon-best") || 0);
+    bestEl.textContent = String(best);
+
+    function randFood() {
+      while (true) {
+        const x = Math.floor(Math.random() * COLS);
+        const y = Math.floor(Math.random() * ROWS);
+        if (!snake.some((s) => s.x === x && s.y === y)) return { x, y };
+      }
+    }
+
+    function reset() {
+      snake = [
+        { x: 8, y: 10 },
+        { x: 7, y: 10 },
+        { x: 6, y: 10 },
+      ];
+      dir = { x: 1, y: 0 };
+      nextDir = { ...dir };
+      food = randFood();
+      score = 0;
+      scoreEl.textContent = "0";
+      statusEl.textContent = "Go.";
+      running = true;
+      clearInterval(timer);
+      timer = setInterval(tick, SPEED);
+      draw();
+    }
+
+    function setDir(nx, ny) {
+      if (dir.x + nx === 0 && dir.y + ny === 0) return;
+      nextDir = { x: nx, y: ny };
+    }
+
+    function tick() {
+      if (!running) return;
+      dir = nextDir;
+      const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+      if (head.x < 0 || head.y < 0 || head.x >= COLS || head.y >= ROWS || snake.some((s) => s.x === head.x && s.y === head.y)) {
+        running = false;
+        clearInterval(timer);
+        statusEl.textContent = "Game over — press Play.";
+        restartBtn.textContent = "Play again";
+        return;
+      }
+
+      snake.unshift(head);
+      if (head.x === food.x && head.y === food.y) {
+        score += 1;
+        scoreEl.textContent = String(score);
+        if (score > best) {
+          best = score;
+          bestEl.textContent = String(best);
+          localStorage.setItem("hdev505-ribbon-best", String(best));
+        }
+        food = randFood();
+      } else {
+        snake.pop();
+      }
+      draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#10141c";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // subtle grid
+      ctx.strokeStyle = "rgba(201,169,98,0.06)";
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= COLS; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * CELL, 0);
+        ctx.lineTo(i * CELL, canvas.height);
+        ctx.stroke();
+      }
+      for (let j = 0; j <= ROWS; j++) {
+        ctx.beginPath();
+        ctx.moveTo(0, j * CELL);
+        ctx.lineTo(canvas.width, j * CELL);
+        ctx.stroke();
+      }
+
+      // food
+      ctx.fillStyle = "#c9a962";
+      ctx.beginPath();
+      ctx.arc(food.x * CELL + CELL / 2, food.y * CELL + CELL / 2, CELL * 0.32, 0, Math.PI * 2);
+      ctx.fill();
+
+      // snake
+      snake.forEach((part, i) => {
+        const t = i / Math.max(snake.length - 1, 1);
+        ctx.fillStyle = i === 0 ? "#d4b56f" : `rgba(201,169,98,${0.85 - t * 0.45})`;
+        const pad = i === 0 ? 2 : 3;
+        const x = part.x * CELL + pad;
+        const y = part.y * CELL + pad;
+        const w = CELL - pad * 2;
+        const h = CELL - pad * 2;
+        const r = 5;
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+        ctx.fill();
+      });
+    }
+
+    document.addEventListener("keydown", (e) => {
+      const key = e.key.toLowerCase();
+      if (["arrowup", "w"].includes(key)) { e.preventDefault(); setDir(0, -1); }
+      if (["arrowdown", "s"].includes(key)) { e.preventDefault(); setDir(0, 1); }
+      if (["arrowleft", "a"].includes(key)) { e.preventDefault(); setDir(-1, 0); }
+      if (["arrowright", "d"].includes(key)) { e.preventDefault(); setDir(1, 0); }
+    });
+
+    document.querySelectorAll("[data-dir]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const map = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+        const [x, y] = map[btn.dataset.dir];
+        setDir(x, y);
+      });
+    });
+
+    restartBtn.addEventListener("click", reset);
+    draw();
+  </script>
+</body>
+</html>

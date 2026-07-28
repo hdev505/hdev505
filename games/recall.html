@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recall · hdev505</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.65rem;
+    }
+
+    .card {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, #1c2230, #141820);
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.35s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      perspective: 800px;
+    }
+
+    .card:hover:not(.matched):not(.flipped) {
+      border-color: rgba(201, 169, 98, 0.4);
+    }
+
+    .card.flipped,
+    .card.matched {
+      transform: rotateY(180deg);
+    }
+
+    .card.matched {
+      border-color: rgba(201, 169, 98, 0.55);
+      box-shadow: 0 0 18px var(--gold-glow);
+    }
+
+    .face {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 4vw, 2rem);
+    }
+
+    .back {
+      background: radial-gradient(circle at 30% 20%, rgba(201, 169, 98, 0.18), transparent 45%), #171b24;
+      color: rgba(201, 169, 98, 0.35);
+    }
+
+    .front {
+      background: #1f2430;
+      color: var(--gold);
+      transform: rotateY(180deg);
+    }
+
+    .win {
+      margin-top: 0.85rem;
+      text-align: center;
+      color: var(--gold);
+      font-family: var(--display);
+      font-size: 1.35rem;
+      min-height: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="brand">Recall</div>
+      <a class="back" href="index.html">All games</a>
+    </div>
+
+    <h1>Recall</h1>
+    <p class="lede">Flip two cards at a time. Match all eight pairs.</p>
+
+    <section class="panel">
+      <div class="hud">
+        <div class="stat">
+          <span>Moves</span>
+          <strong id="moves">0</strong>
+        </div>
+        <div class="stat">
+          <span>Matched</span>
+          <strong id="matched">0 / 8</strong>
+        </div>
+        <button class="btn primary" id="restart" type="button">New game</button>
+      </div>
+
+      <div class="board" id="board" aria-label="Memory board"></div>
+      <div class="win" id="win" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script>
+    const symbols = ["◇", "△", "○", "□", "✦", "✶", "◎", "▣"];
+    const board = document.getElementById("board");
+    const movesEl = document.getElementById("moves");
+    const matchedEl = document.getElementById("matched");
+    const winEl = document.getElementById("win");
+    const restartBtn = document.getElementById("restart");
+
+    let deck = [];
+    let first = null;
+    let lock = false;
+    let moves = 0;
+    let matched = 0;
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function render() {
+      board.innerHTML = "";
+      deck.forEach((item, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "card";
+        btn.dataset.index = String(index);
+        btn.setAttribute("aria-label", "Hidden card");
+        btn.innerHTML =
+          '<div class="face back">·</div><div class="face front">' + item.symbol + "</div>";
+        btn.addEventListener("click", () => flip(index, btn));
+        board.appendChild(btn);
+      });
+    }
+
+    function flip(index, el) {
+      const card = deck[index];
+      if (lock || card.matched || card.flipped) return;
+
+      card.flipped = true;
+      el.classList.add("flipped");
+
+      if (!first) {
+        first = { index, el };
+        return;
+      }
+
+      moves += 1;
+      movesEl.textContent = String(moves);
+      lock = true;
+
+      const a = deck[first.index];
+      const b = card;
+
+      if (a.symbol === b.symbol) {
+        a.matched = b.matched = true;
+        first.el.classList.add("matched");
+        el.classList.add("matched");
+        matched += 1;
+        matchedEl.textContent = matched + " / 8";
+        first = null;
+        lock = false;
+        if (matched === 8) {
+          winEl.textContent = "Cleared in " + moves + " moves.";
+        }
+      } else {
+        const prev = first;
+        setTimeout(() => {
+          a.flipped = b.flipped = false;
+          prev.el.classList.remove("flipped");
+          el.classList.remove("flipped");
+          first = null;
+          lock = false;
+        }, 650);
+      }
+    }
+
+    function newGame() {
+      deck = shuffle(
+        symbols.concat(symbols).map((symbol) => ({
+          symbol,
+          flipped: false,
+          matched: false,
+        }))
+      );
+      first = null;
+      lock = false;
+      moves = 0;
+      matched = 0;
+      movesEl.textContent = "0";
+      matchedEl.textContent = "0 / 8";
+      winEl.textContent = "";
+      render();
+    }
+
+    restartBtn.addEventListener("click", newGame);
+    newGame();
+  </script>
+</body>
+</html>

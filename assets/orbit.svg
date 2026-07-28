@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="160" viewBox="0 0 520 160" role="img" aria-label="Arcade orbit">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e2c57a" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#c9a962" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="520" height="160" fill="transparent"/>
+  <g transform="translate(260 80)">
+    <circle r="18" fill="url(#core)">
+      <animate attributeName="r" values="14;22;14" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="6" fill="#e2c57a"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite"/>
+      <circle cx="70" cy="0" r="4" fill="#c9a962"/>
+      <circle cx="-55" cy="35" r="3" fill="#8b7355"/>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="16s" repeatCount="indefinite"/>
+      <ellipse cx="0" cy="0" rx="95" ry="36" fill="none" stroke="#c9a962" stroke-opacity="0.35" stroke-width="1"/>
+      <circle cx="95" cy="0" r="3.5" fill="#e2c57a"/>
+    </g>
+    <ellipse cx="0" cy="0" rx="120" ry="48" fill="none" stroke="#8b7355" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="3 10">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="24s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+  <text x="260" y="148" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa1ad" letter-spacing="3">QUICK GAMES</text>
+</svg>

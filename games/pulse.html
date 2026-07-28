@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pulse · hdev505</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .stage {
+      height: min(360px, 55vh);
+      border-radius: 14px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stage.wait {
+      background: #151922;
+    }
+
+    .stage.ready {
+      background: radial-gradient(circle at center, #d4b56f, #c9a962 45%, #8b7355 100%);
+      box-shadow: inset 0 0 60px rgba(255, 255, 255, 0.12), 0 0 40px var(--gold-glow);
+    }
+
+    .stage.early {
+      background: #2a1717;
+    }
+
+    .stage-copy {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      text-align: center;
+      padding: 1rem;
+      pointer-events: none;
+    }
+
+    .stage.ready .stage-copy {
+      color: #111;
+    }
+
+    .best {
+      color: var(--ok);
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="brand">Pulse</div>
+      <a class="back" href="index.html">All games</a>
+    </div>
+
+    <h1>Pulse</h1>
+    <p class="lede">Click when the panel turns gold. Clicking too early resets the round.</p>
+
+    <section class="panel">
+      <div class="hud">
+        <div class="stat">
+          <span>Last</span>
+          <strong id="last">—</strong>
+        </div>
+        <div class="stat">
+          <span>Best</span>
+          <strong id="best" class="best">—</strong>
+        </div>
+        <button class="btn primary" id="start" type="button">Start</button>
+      </div>
+
+      <div class="stage wait" id="stage" role="button" tabindex="0" aria-label="Reaction stage">
+        <div class="stage-copy" id="copy">Press Start</div>
+      </div>
+      <p class="hint">Tip: stay still until gold appears.</p>
+    </section>
+  </main>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const copy = document.getElementById("copy");
+    const lastEl = document.getElementById("last");
+    const bestEl = document.getElementById("best");
+    const startBtn = document.getElementById("start");
+
+    let mode = "idle"; // idle | waiting | ready
+    let timer = null;
+    let readyAt = 0;
+    let best = Number(localStorage.getItem("hdev505-pulse-best") || 0) || null;
+
+    if (best) bestEl.textContent = best + " ms";
+
+    function clearTimer() {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+    }
+
+    function setMode(next, text) {
+      mode = next;
+      stage.className = "stage " + (next === "ready" ? "ready" : next === "early" ? "early" : "wait");
+      copy.textContent = text;
+    }
+
+    function beginRound() {
+      clearTimer();
+      setMode("waiting", "Wait for gold…");
+      const delay = 1200 + Math.random() * 2800;
+      timer = setTimeout(() => {
+        readyAt = performance.now();
+        setMode("ready", "Now!");
+      }, delay);
+    }
+
+    function onTap() {
+      if (mode === "idle") {
+        beginRound();
+        return;
+      }
+      if (mode === "waiting") {
+        clearTimer();
+        setMode("early", "Too early");
+        mode = "idle";
+        return;
+      }
+      if (mode === "ready") {
+        const ms = Math.round(performance.now() - readyAt);
+        lastEl.textContent = ms + " ms";
+        if (!best || ms < best) {
+          best = ms;
+          bestEl.textContent = ms + " ms";
+          localStorage.setItem("hdev505-pulse-best", String(ms));
+        }
+        setMode("wait", ms + " ms — tap to retry");
+        mode = "idle";
+      }
+    }
+
+    startBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      beginRound();
+    });
+    stage.addEventListener("click", onTap);
+    stage.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onTap();
+      }
+    });
+  </script>
+</body>
+</html>
