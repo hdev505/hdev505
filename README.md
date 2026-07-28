@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/hero.svg" width="100%" alt="Honest · hdev505" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/banner.svg" width="100%" alt="Honest hdev505" />
 </div>
 
 <br/>
