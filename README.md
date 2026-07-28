@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/hero.svg" width="100%" alt="Honest · hdev505" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/hero.svg" width="100%" alt="Honest · hdev505" />
 </div>
 
 <br/>
@@ -9,7 +9,7 @@
 </div>
 
 <div align="center">
-  <img src="./assets/divider.svg" width="80%" alt="" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/divider.svg" width="80%" alt="" />
 </div>
 
 <div align="center">
@@ -19,7 +19,7 @@
 </div>
 
 <div align="center">
-  <img src="./assets/wave.svg" width="90%" alt="" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/wave.svg" width="90%" alt="" />
 </div>
 
 ## About
@@ -29,7 +29,7 @@ Senior software engineer with **8+ years** shipping production systems across we
 Currently focused on modern TypeScript stacks, realtime backends, and polished product experiences.
 
 <div align="center">
-  <img src="./assets/divider.svg" width="70%" alt="" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/divider.svg" width="70%" alt="" />
 </div>
 
 ## Stack
@@ -70,33 +70,86 @@ Currently focused on modern TypeScript stacks, realtime backends, and polished p
 </details>
 
 <div align="center">
-  <img src="./assets/wave.svg" width="90%" alt="" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/wave.svg" width="90%" alt="" />
 </div>
 
 ## Quick games
 
+GitHub profiles can’t run JavaScript inline — so the full arcade opens in one page with games **rendered inside it**. On this README: live animated previews + a tiny playable riddle.
+
 <div align="center">
-  <img src="./assets/orbit.svg" width="360" alt="Quick games orbit" />
+  <a href="https://raw.githack.com/hdev505/hdev505/main/games/index.html">
+    <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/orbit.svg" width="360" alt="Open arcade" />
+  </a>
 </div>
 
-Take a 30-second break. Three micro-games — no login, just play.
-
 <div align="center">
+  <a href="https://raw.githack.com/hdev505/hdev505/main/games/index.html?game=pulse">
+    <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/preview-pulse.svg" width="260" alt="Pulse preview" />
+  </a>
+  &nbsp;
+  <a href="https://raw.githack.com/hdev505/hdev505/main/games/index.html?game=recall">
+    <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/preview-recall.svg" width="260" alt="Recall preview" />
+  </a>
+  &nbsp;
+  <a href="https://raw.githack.com/hdev505/hdev505/main/games/index.html?game=ribbon">
+    <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/preview-ribbon.svg" width="260" alt="Ribbon preview" />
+  </a>
+</div>
 
-| | | |
-|:---:|:---:|:---:|
-| **[Pulse](https://raw.githack.com/hdev505/hdev505/main/games/pulse.html)** | **[Recall](https://raw.githack.com/hdev505/hdev505/main/games/recall.html)** | **[Ribbon](https://raw.githack.com/hdev505/hdev505/main/games/ribbon.html)** |
-| Reaction timer | Memory match | Mini snake |
-| *Wait for gold* | *Match the pairs* | *WASD / arrows* |
+<p align="center">
+  <a href="https://raw.githack.com/hdev505/hdev505/main/games/index.html"><strong>▶ Play all games in the arcade</strong></a>
+</p>
 
+### Play on this page
+
+A 20-second riddle — expand one answer only when you’re ready.
+
+<details>
+<summary><strong>Room 1 · Signal</strong> — What gets sharper the more you use it, yet never leaves the editor?</summary>
 <br/>
 
-[Open the arcade →](https://raw.githack.com/hdev505/hdev505/main/games/index.html)
+Your **focus** (and your cursor). Ship the next commit.
 
-</div>
+</details>
+
+<details>
+<summary><strong>Room 2 · Pattern</strong> — `2, 3, 5, 7, 11, ?`</summary>
+<br/>
+
+**13** — primes. Nice.
+
+</details>
+
+<details>
+<summary><strong>Room 3 · Gold path</strong> — Pick a door:</summary>
+<br/>
+
+- [Take the quiet door →](#room-quiet)
+- [Take the loud door →](#room-loud)
+
+</details>
+
+<a id="room-quiet"></a>
+<details>
+<summary><strong>Quiet door</strong></summary>
+<br/>
+
+You find a clean PR, one thoughtful review, and green CI. Luxury.
+
+</details>
+
+<a id="room-loud"></a>
+<details>
+<summary><strong>Loud door</strong></summary>
+<br/>
+
+Deploy Friday. Rollback Saturday. Lessons: priceless. Sleep: negotiable.
+
+</details>
 
 <div align="center">
-  <img src="./assets/divider.svg" width="70%" alt="" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/divider.svg" width="70%" alt="" />
 </div>
 
 ## Activity
@@ -109,7 +162,7 @@ Take a 30-second break. Three micro-games — no login, just play.
 <br/>
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com/?user=hdev505&theme=dark&hide_border=true&background=00000000&ring=C9A962&fire=C9A962&currStreakLabel=C9A962" alt="GitHub streak" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/streak.svg" alt="GitHub streak" />
 </div>
 
 <br/>
@@ -129,7 +182,7 @@ Take a 30-second break. Three micro-games — no login, just play.
 </div>
 
 <div align="center">
-  <img src="./assets/wave.svg" width="90%" alt="" />
+  <img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/wave.svg" width="90%" alt="" />
 </div>
 
 <div align="center">
@@ -146,7 +199,7 @@ Open to thoughtful collaborations, product builds, and engineering partnerships.
 
 <br/>
 
-<img src="./assets/footer.svg" width="80%" alt="" />
+<img src="https://raw.githubusercontent.com/hdev505/hdev505/main/assets/footer.svg" width="80%" alt="" />
 
 <sub>Crafted with intention · hdev505</sub>
 

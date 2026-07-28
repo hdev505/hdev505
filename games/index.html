@@ -3,11 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quick Games · hdev505</title>
+  <title>Arcade · hdev505</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
+  <style>
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .tab:hover {
+      color: var(--gold);
+      border-color: rgba(201, 169, 98, 0.45);
+    }
+
+    .tab.active {
+      color: #111;
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .stage {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0a0c10;
+      min-height: 72vh;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .stage iframe {
+      display: block;
+      width: 100%;
+      height: min(78vh, 820px);
+      border: 0;
+      background: #0a0c10;
+    }
+
+    .note {
+      margin-top: 0.85rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <main class="shell">
@@ -16,26 +74,48 @@
       <a class="back" href="https://github.com/hdev505">GitHub profile</a>
     </div>
 
-    <h1>Quick games</h1>
-    <p class="lede">A few polished micro-games for a short break. No accounts, no noise — just play.</p>
+    <h1>Play here</h1>
+    <p class="lede">Games render inside this page. Pick one and stay in the arcade.</p>
 
-    <div class="grid-cards">
-      <a class="game-card" href="pulse.html">
-        <span class="tag">Reflex</span>
-        <h2>Pulse</h2>
-        <p>Wait for the gold flash, then click. Measure your reaction time.</p>
-      </a>
-      <a class="game-card" href="recall.html">
-        <span class="tag">Memory</span>
-        <h2>Recall</h2>
-        <p>Match the pairs. Fewer moves, cleaner mind.</p>
-      </a>
-      <a class="game-card" href="ribbon.html">
-        <span class="tag">Arcade</span>
-        <h2>Ribbon</h2>
-        <p>A sleek little snake. Collect gold, don’t bite yourself.</p>
-      </a>
+    <div class="tabs" role="tablist" aria-label="Games">
+      <button class="tab active" type="button" role="tab" aria-selected="true" data-src="pulse.html">Pulse</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-src="recall.html">Recall</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-src="ribbon.html">Ribbon</button>
     </div>
+
+    <div class="stage">
+      <iframe id="frame" title="Game stage" src="pulse.html" loading="eager"></iframe>
+    </div>
+    <p class="note">Tip: Ribbon plays best with a keyboard. Pulse and Recall are click/touch friendly.</p>
   </main>
+
+  <script>
+    const frame = document.getElementById("frame");
+    const tabs = [...document.querySelectorAll(".tab")];
+    const gameMap = {
+      pulse: "pulse.html",
+      recall: "recall.html",
+      ribbon: "ribbon.html",
+    };
+
+    function openGame(src) {
+      const tab = tabs.find((t) => t.dataset.src === src) || tabs[0];
+      tabs.forEach((t) => {
+        t.classList.toggle("active", t === tab);
+        t.setAttribute("aria-selected", t === tab ? "true" : "false");
+      });
+      frame.src = tab.dataset.src;
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => openGame(tab.dataset.src));
+    });
+
+    const params = new URLSearchParams(location.search);
+    const requested = params.get("game");
+    if (requested && gameMap[requested]) {
+      openGame(gameMap[requested]);
+    }
+  </script>
 </body>
 </html>

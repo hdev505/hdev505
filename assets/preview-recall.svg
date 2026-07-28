@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="200" viewBox="0 0 280 200" role="img" aria-label="Recall preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0f14"/>
+      <stop offset="100%" stop-color="#151922"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="200" rx="16" fill="url(#bg)" stroke="#c9a962" stroke-opacity="0.35"/>
+  <text x="140" y="28" text-anchor="middle" fill="#c9a962" font-family="Georgia, serif" font-size="14" letter-spacing="3">RECALL</text>
+  <g transform="translate(54 46)">
+    <g>
+      <rect width="48" height="48" rx="8" fill="#1a2030" stroke="#c9a962" stroke-opacity="0.25"/>
+      <text x="24" y="31" text-anchor="middle" fill="#c9a962" font-size="18" opacity="0">
+        A
+        <animate attributeName="opacity" values="0;1;1;0;0" dur="4s" repeatCount="indefinite"/>
+      </text>
+    </g>
+    <g transform="translate(58 0)">
+      <rect width="48" height="48" rx="8" fill="#1a2030" stroke="#c9a962" stroke-opacity="0.25"/>
+      <text x="24" y="31" text-anchor="middle" fill="#c9a962" font-size="18" opacity="0">
+        B
+        <animate attributeName="opacity" values="0;0;1;1;0" dur="4s" begin="0.4s" repeatCount="indefinite"/>
+      </text>
+    </g>
+    <g transform="translate(116 0)">
+      <rect width="48" height="48" rx="8" fill="#1a2030" stroke="#c9a962" stroke-opacity="0.25"/>
+      <text x="24" y="31" text-anchor="middle" fill="#c9a962" font-size="18" opacity="0">
+        C
+        <animate attributeName="opacity" values="0;0;0;1;0" dur="4s" begin="0.8s" repeatCount="indefinite"/>
+      </text>
+    </g>
+    <g transform="translate(0 58)">
+      <rect width="48" height="48" rx="8" fill="#1a2030" stroke="#c9a962" stroke-opacity="0.25"/>
+      <text x="24" y="31" text-anchor="middle" fill="#c9a962" font-size="18" opacity="0">
+        D
+        <animate attributeName="opacity" values="0;1;0;0;0" dur="4s" begin="1.2s" repeatCount="indefinite"/>
+      </text>
+    </g>
+    <g transform="translate(58 58)">
+      <rect width="48" height="48" rx="8" fill="#1a2030" stroke="#c9a962" stroke-opacity="0.25"/>
+      <text x="24" y="31" text-anchor="middle" fill="#c9a962" font-size="18" opacity="0">
+        A
+        <animate attributeName="opacity" values="0;0;1;1;0" dur="4s" begin="1.6s" repeatCount="indefinite"/>
+      </text>
+    </g>
+    <g transform="translate(116 58)">
+      <rect width="48" height="48" rx="8" fill="#1a2030" stroke="#c9a962" stroke-opacity="0.25"/>
+      <text x="24" y="31" text-anchor="middle" fill="#c9a962" font-size="18">.</text>
+    </g>
+  </g>
+  <text x="140" y="182" text-anchor="middle" fill="#8b919c" font-family="Segoe UI, sans-serif" font-size="11">memory match | click to play</text>
+</svg>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="200" viewBox="0 0 280 200" role="img" aria-label="Ribbon preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0f14"/>
+      <stop offset="100%" stop-color="#151922"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="200" rx="16" fill="url(#bg)" stroke="#c9a962" stroke-opacity="0.35"/>
+  <text x="140" y="28" text-anchor="middle" fill="#c9a962" font-family="Georgia, serif" font-size="14" letter-spacing="3">RIBBON</text>
+  <rect x="36" y="44" width="208" height="118" rx="10" fill="#10141c" stroke="#c9a962" stroke-opacity="0.15"/>
+  <g>
+    <rect x="70" y="90" width="14" height="14" rx="3" fill="#c9a962" opacity="0.45">
+      <animate attributeName="x" values="70;86;102;118;134;150;166;150;134;118;102;86;70" dur="4.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="86" y="90" width="14" height="14" rx="3" fill="#c9a962" opacity="0.65">
+      <animate attributeName="x" values="86;102;118;134;150;166;182;166;150;134;118;102;86" dur="4.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="102" y="90" width="14" height="14" rx="3" fill="#d4b56f">
+      <animate attributeName="x" values="102;118;134;150;166;182;198;182;166;150;134;118;102" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="90;90;90;90;90;90;90;106;106;106;106;106;90" dur="4.5s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="210" cy="98" r="5" fill="#e2c57a">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <text x="140" y="182" text-anchor="middle" fill="#8b919c" font-family="Segoe UI, sans-serif" font-size="11">mini snake | click to play</text>
+</svg>

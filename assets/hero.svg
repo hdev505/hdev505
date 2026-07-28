@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="hdev505 animated banner">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -22,9 +23,6 @@
       <stop offset="50%" stop-color="#ffffff" stop-opacity="0.08"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
-    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="12"/>
-    </filter>
   </defs>
 
   <rect width="1200" height="320" fill="url(#bg)"/>
@@ -32,13 +30,11 @@
     <animate attributeName="opacity" values="0.7;1;0.7" dur="5s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- soft grid -->
   <g stroke="#c9a962" stroke-opacity="0.05" stroke-width="1">
     <path d="M0 64 H1200 M0 128 H1200 M0 192 H1200 M0 256 H1200"/>
     <path d="M150 0 V320 M300 0 V320 M450 0 V320 M600 0 V320 M750 0 V320 M900 0 V320 M1050 0 V320"/>
   </g>
 
-  <!-- orbiting ring -->
   <g transform="translate(600 150)">
     <ellipse cx="0" cy="0" rx="210" ry="70" fill="none" stroke="#c9a962" stroke-opacity="0.18" stroke-width="1.2"/>
     <ellipse cx="0" cy="0" rx="210" ry="70" fill="none" stroke="#e2c57a" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="6 180">
@@ -49,7 +45,6 @@
     </ellipse>
   </g>
 
-  <!-- floating particles -->
   <g fill="#e2c57a">
     <circle cx="180" cy="70" r="2.2" opacity="0.7">
       <animate attributeName="cy" values="70;50;70" dur="6s" repeatCount="indefinite"/>
@@ -72,17 +67,14 @@
     </circle>
   </g>
 
-  <!-- light sweep -->
   <rect x="-220" y="0" width="180" height="320" fill="url(#sweep)" opacity="0.9">
     <animate attributeName="x" values="-220;1220" dur="7s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- brand -->
-  <text x="600" y="128" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-weight="600" fill="url(#gold)" letter-spacing="6">HONEST</text>
-  <text x="600" y="168" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="20" fill="#c9a962" opacity="0.85" letter-spacing="8">hdev505</text>
-  <text x="600" y="210" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" fill="#9aa1ad" letter-spacing="2">SENIOR SOFTWARE ENGINEER  ·  FULL-STACK CRAFT</text>
+  <text x="600" y="128" text-anchor="middle" font-family="Georgia, Times New Roman, serif" font-size="54" font-weight="600" fill="url(#gold)" letter-spacing="6">HONEST</text>
+  <text x="600" y="168" text-anchor="middle" font-family="Georgia, Times New Roman, serif" font-size="20" fill="#c9a962" opacity="0.85" letter-spacing="8">hdev505</text>
+  <text x="600" y="210" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" fill="#9aa1ad" letter-spacing="2">SENIOR SOFTWARE ENGINEER  |  FULL-STACK CRAFT</text>
 
-  <!-- animated underline -->
   <rect x="430" y="228" width="340" height="1.5" rx="1" fill="url(#gold)" opacity="0.85">
     <animate attributeName="width" values="120;340;120" dur="5s" repeatCount="indefinite"/>
     <animate attributeName="x" values="540;430;540" dur="5s" repeatCount="indefinite"/>

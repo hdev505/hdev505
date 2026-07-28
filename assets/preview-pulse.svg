@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="200" viewBox="0 0 280 200" role="img" aria-label="Pulse preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0f14"/>
+      <stop offset="100%" stop-color="#151922"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="200" rx="16" fill="url(#bg)" stroke="#c9a962" stroke-opacity="0.35"/>
+  <text x="140" y="28" text-anchor="middle" fill="#c9a962" font-family="Georgia, serif" font-size="14" letter-spacing="3">PULSE</text>
+  <rect x="28" y="48" width="224" height="110" rx="10" fill="#12161f" stroke="#c9a962" stroke-opacity="0.2"/>
+  <rect x="28" y="48" width="224" height="110" rx="10" fill="#c9a962" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.95;0.95;0" keyTimes="0;0.55;0.58;0.72;1" dur="3.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="140" y="112" text-anchor="middle" fill="#9aa1ad" font-family="Segoe UI, sans-serif" font-size="16">
+    <tspan>
+      wait...
+      <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.55;0.58;0.85;1" dur="3.2s" repeatCount="indefinite"/>
+    </tspan>
+  </text>
+  <text x="140" y="112" text-anchor="middle" fill="#111" font-family="Georgia, serif" font-size="22" font-weight="600" opacity="0">
+    NOW
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.58;0.72;1" dur="3.2s" repeatCount="indefinite"/>
+  </text>
+  <text x="140" y="182" text-anchor="middle" fill="#8b919c" font-family="Segoe UI, sans-serif" font-size="11">reaction timer | click to play</text>
+</svg>
